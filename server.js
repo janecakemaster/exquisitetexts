@@ -1,52 +1,52 @@
-/* modules */
-
+/**
+* Dependencies.
+*/
 var Hapi = require('hapi');
-var Joi = require('joi');
 
-// var Twilio = require('twilio');
-// var Firebase = require('firebase');
-
-// var PoemData = require('./poem-data');
-// var poems = PoemData(new Firebase('https://exquisitehues.firebaseio.com/'));
-
+// Create a new server
 var server = new Hapi.Server();
 
+// Setup the server with a host and port
 server.connection({
-    port: process.env.PORT || 3000
+    port: parseInt(process.env.PORT, 10) || 3000,
+    host: '0.0.0.0'
 });
 
-/* Routes */
-
-// server.route({
-//     method: 'POST',
-//     path: '/nextline',
-//     handler: addLine,
-//     config: {
-//         validate: {
-//             payload: {
-//                 line: Joi.string()
-//             }
-//         }
-//     },
-// });
-
-server.route({
-    method: 'GET',
-    path: '/{param*}',
-    handler: {
-        directory: {
-            path: './public'
-        }
+// Setup the views engine and folder
+server.views({
+    engines: {
+        html: require('swig')
     },
+    path: './server/views'
 });
 
-server.start(function() {
-    console.log('yo shit is up at ', server.info.uri);
+// Export the server to be required elsewhere.
+module.exports = server;
+
+/*
+    Load all plugins and then start the server.
+    First: community/npm plugins are loaded
+    Second: project specific plugins are loaded
+ */
+server.register([
+
+    {
+        register: require("hapi-assets"),
+        options: require('./assets.js')
+    },
+    {
+        register: require("hapi-named-routes")
+    },
+    {
+        register: require('./server/assets/index.js')
+    },
+    {
+      register: require('./server/base/index.js')
+    }
+], function () {
+    //Start the server
+    server.start(function() {
+        //Log to the console the host and port info
+        console.log('Server started at: ' + server.info.uri);
+    });
 });
-
-
-// /* helpers */
-
-// function addLine(req, res) {
-//     res().redirect('/');
-// }

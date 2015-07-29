@@ -41,16 +41,6 @@ exports.register = function(server, options, next){
                 },
                 id: 'js'
             }
-        },
-        {
-            method: 'GET',
-            path: '/bower_components/{path*}',
-            config: {
-                handler: {
-                    directory: { path: './public/bower_components' }
-                },
-                id: 'bower'
-            }
         }
     ]);
 
