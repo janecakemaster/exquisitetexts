@@ -2,6 +2,7 @@
   "name": "exquisite-hues",
   "version": "1.0.0",
   "description": "",
+  "main": "web.js",
   "scripts": {
     "test": "gulp test"
   },
