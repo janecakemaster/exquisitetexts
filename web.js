@@ -36,8 +36,7 @@ server.route({
     handler: {
         directory: {
             path: './public',
-            index: true
-        }
+            index: 'index.html'
     },
 });
 
