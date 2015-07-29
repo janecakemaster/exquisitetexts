@@ -12,49 +12,51 @@ var assets = require('./assets');
 
 gulp.task('build', function() {
 
-    var gulpFileCwd = __dirname + '/public';
-    process.chdir(gulpFileCwd);
+  var gulpFileCwd = __dirname + '/public';
+  process.chdir(gulpFileCwd);
 
-    gulp.src(assets.development.css)
-        .pipe(concat('styles.css'))
-        .pipe(minifycss())
-        .pipe(gulp.dest('./css/'));
-    // concat and minify your js
-    gulp.src(assets.development.js)
-        .pipe(concat('scripts.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./js/'));
+  gulp.src(assets.development.css)
+    .pipe(concat('styles.css'))
+    .pipe(minifycss())
+    .pipe(gulp.dest('./css/'));
+  // concat and minify your js
+  gulp.src(assets.development.js)
+    .pipe(concat('scripts.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./js/'));
 
-    return gulp.src([
-            '**/*.js',
-            '!node_modules'
-        ])
-        .pipe(jshint({
-            lookup: true
-        }))
-        .pipe(jscs({
-            fix: true
-        }))
-        .pipe(jshint.reporter(stylish))
-        .pipe(livereload());
+  gulp.src([
+    '**/*.js',
+    '!node_modules'
+  ])
+    .pipe(jshint({
+      lookup: true
+    }))
+    .pipe(jscs({
+      fix: true
+    }))
+    .pipe(jshint.reporter(stylish))
+    .pipe(livereload());
+
+  return process.chdir(__dirname);
 });
 
 gulp.task('test', function() {
-    return gulp.src('tests/**/*.js')
-        .pipe(mocha({
-            reporter: 'nyan'
-        }));
+  return gulp.src('tests/**/*.js')
+    .pipe(mocha({
+      reporter: 'nyan'
+    }));
 });
 
 gulp.task('default', ['build', 'test']);
 
 gulp.task('watch', function() {
-    livereload.listen();
-    gulp.watch(['./server/**/*.html', './public/js/*.js', './public/css/*.css'], [
-        'build', 'reload'
-    ]);
+  livereload.listen();
+  gulp.watch(['./server/**/*.html', './public/js/*.js', './public/css/*.css'], [
+    'reload'
+  ]);
 });
 
 gulp.task('reload', function() {
-    return livereload.reload();
+  return livereload.reload();
 });

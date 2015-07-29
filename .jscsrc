@@ -5,7 +5,7 @@
     "requireParenthesesAroundIIFE": true,
     "maximumLineLength": 120,
     "validateLineBreaks": "LF",
-    "validateIndentation": 4,
+    "validateIndentation": 2,
     "requireTrailingComma": {
         "ignoreSingleValue": true,
         "ignoreSingleLine": true
