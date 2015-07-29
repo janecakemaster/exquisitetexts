@@ -14,10 +14,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "firebase": "^2.2.7",
     "hapi": "^8.5.1",
     "joi": "^6.6.0",
-    "twilio": "^2.2.1",
-    "firebase": "^2.2.7"
+    "swig": "^1.4.2",
+    "twilio": "^2.2.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
