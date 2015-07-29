@@ -32,12 +32,9 @@ server.connection({
 
 server.route({
     method: 'GET',
-    path: '/{param*}',
+    path: '/',
     handler: {
-        directory: {
-            path: './public',
-            index: 'index.html'
-        }
+      file: 'public/index.html'
     },
 });
 
