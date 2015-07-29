@@ -37,6 +37,7 @@ server.route({
         directory: {
             path: './public',
             index: 'index.html'
+        }
     },
 });
 
