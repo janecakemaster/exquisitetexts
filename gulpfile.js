@@ -10,31 +10,24 @@ var livereload = require('gulp-livereload');
 
 var assets = require('./assets');
 
-gulp.task('build', function(){
+gulp.task('build', function() {
 
-    var gulpFileCwd = __dirname +'/public';
+    var gulpFileCwd = __dirname + '/public';
     process.chdir(gulpFileCwd);
 
-    // concat and minify your css
     gulp.src(assets.development.css)
         .pipe(concat('styles.css'))
         .pipe(minifycss())
         .pipe(gulp.dest('./css/'));
-
     // concat and minify your js
     gulp.src(assets.development.js)
         .pipe(concat('scripts.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./js/'));
 
-});
-
-
-gulp.task('lint', function() {
     return gulp.src([
-            'server.js',
-            'user-data.js',
-            'index.js'
+            '**/*.js',
+            '!node_modules'
         ])
         .pipe(jshint({
             lookup: true
@@ -53,11 +46,11 @@ gulp.task('test', function() {
         }));
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build', 'test']);
 
 gulp.task('watch', function() {
     livereload.listen();
-    gulp.watch(['./public/*.html', './public/*.js', './public/*.css'], [
+    gulp.watch(['./server/**/*.html', './public/js/*.js', './public/css/*.css'], [
         'build', 'reload'
     ]);
 });

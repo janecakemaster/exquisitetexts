@@ -3,11 +3,16 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-    <ul class="menu">
-        <li><a href="{{path.index}}">Home</a></li>
-        <li><a href="{{path.about}}">About</a></li>
-    </ul>
+<section class="current">
+  <h1>the last line</h1>
+  <p id="lastline"></p>
+  <form action="/nextline" method="POST">
+      <input type="text" name="line">
+  </form>
+</section>
+<section class="archive">
+    <div id="poems">
+    </div>
+</section>
 
-    <h1>{{title}}</h1>
-    <p>This is the homepage. AKA Index.</p>
 {% endblock %}
