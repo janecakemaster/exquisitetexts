@@ -1,57 +1,57 @@
 var Firebase = require('firebase'),
-  currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
-  linesRef = currentRef.child('lines'),
-  peopleRef = currentRef.child('people'),
-  poemsRef = new Firebase('https://exquisitehues.firebaseio.com/poems'),
-  max,
-  poem_id;
+    currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
+    linesRef = currentRef.child('lines'),
+    peopleRef = currentRef.child('people'),
+    poemsRef = new Firebase('https://exquisitehues.firebaseio.com/poems'),
+    max,
+    poem_id;
 
 // Base routes for default index/root path, about page, 404 error pages, and others..
 exports.register = function(server, options, next) {
 
-  server.route([{
-    method: 'POST',
-    path: '/addline',
-    config: {
-      handler: handleLinePost
-    }
-  }, {
-    method: 'GET',
-    path: '/about',
-    config: {
-      handler: function(request, reply) {
-        reply.view('about', {
-          title: 'Super Informative About Page'
-        });
-      },
-      id: 'about'
-    }
-  }, {
-    method: 'GET',
-    path: '/',
-    config: {
-      handler: function(request, reply) {
-        // Render the view with the custom greeting
-        reply.view('index', {
-          title: 'exquisite texts'
-        });
-      },
-      id: 'index'
-    }
-  }, {
-    method: 'GET',
-    path: '/{path*}',
-    config: {
-      handler: function(request, reply) {
-        reply.view('404', {
-          title: 'Total Bummer 404 Page'
-        }).code(404);
-      },
-      id: '404'
-    }
-  }]);
+    server.route([{
+        method: 'POST',
+        path: '/addline',
+        config: {
+            handler: handleLinePost
+        }
+    }, {
+        method: 'GET',
+        path: '/about',
+        config: {
+            handler: function(request, reply) {
+                reply.view('about', {
+                    title: 'Super Informative About Page'
+                });
+            },
+            id: 'about'
+        }
+    }, {
+        method: 'GET',
+        path: '/',
+        config: {
+            handler: function(request, reply) {
+                // Render the view with the custom greeting
+                reply.view('index', {
+                    title: 'exquisite texts'
+                });
+            },
+            id: 'index'
+        }
+    }, {
+        method: 'GET',
+        path: '/{path*}',
+        config: {
+            handler: function(request, reply) {
+                reply.view('404', {
+                    title: 'Total Bummer 404 Page'
+                }).code(404);
+            },
+            id: '404'
+        }
+    }]);
 
-  next();
+    next();
 }
 
 /**
@@ -59,9 +59,8 @@ exports.register = function(server, options, next) {
  * @param  {DataSnapshot} snapshot
  */
 currentRef.on('value', function(snapshot) {
-  var curr = snapshot.val();
-  max = curr.max;
-  console.log('max set to', max);
+    var curr = snapshot.val();
+    max = curr.max;
 });
 
 /**
@@ -74,9 +73,7 @@ currentRef.on('value', function(snapshot) {
  * @param  {DataSnapshot} snapshot
  */
 poemsRef.on('value', function(snapshot) {
-  poem_id = snapshot.numChildren();
-  console.log('poem_id:', poem_id);
-  // send out the text
+    poem_id = snapshot.numChildren();
 });
 
 // linesRef.once('value', function(snapshot) {
@@ -99,24 +96,24 @@ poemsRef.on('value', function(snapshot) {
  * @param  {Reply} reply
  */
 function handleLinePost(request, reply) {
-  currentRef.once('value', function(snapshot) {
-    var current = snapshot.val(),
-    indexRef;
+    currentRef.once('value', function(snapshot) {
+        var current = snapshot.val(),
+            indexRef;
 
-    linesRef = currentRef.child('lines');
-    indexRef = linesRef.child(current.lines ? current.lines.length : 0);
-    indexRef.set(request.payload.line);
-    peopleRef.push(request.payload.phone_number);
-  });
+        linesRef = currentRef.child('lines');
+        indexRef = linesRef.child(current.lines ? current.lines.length : 0);
+        indexRef.set(request.payload.line);
+        peopleRef.push(request.payload.phone_number);
+    });
 
-  linesRef.once('value', function(snapshot) {
-    if (snapshot.numChildren() >= max) {
-      createPoem();
-    }
-  });
+    linesRef.once('value', function(snapshot) {
+        if (snapshot.numChildren() >= max) {
+            createPoem();
+        }
+    });
 
-  reply.redirect('/');
-  // @todo reply with text
+    reply.redirect('/');
+    // @todo reply with text
 }
 
 /**
@@ -124,29 +121,31 @@ function handleLinePost(request, reply) {
  * @return {[type]} [description]
  */
 function createPoem() {
-  currentRef.once('value', function(snapshot) {
-    var newPoem = snapshot.val();
-    var poemRef = poemsRef.child(poem_id.toString());
+    currentRef.once('value', function(snapshot) {
+        var newPoem = snapshot.val();
+        var poemRef = poemsRef.child(poem_id.toString());
 
-    poemRef.set({
-      'lines': newPoem.lines,
-      'people': newPoem.people
-    });
+        poemRef.set({
+            'lines': newPoem.lines,
+            'people': newPoem.people,
+            'timestamp': Firebase.ServerValue.TIMESTAMP
+        });
 
-    currentRef.set({
-      'max': generateLimit(),
-      'lines': [],
-      'people': []
-    });
+        currentRef.set({
+            'max': generateLimit(),
+            'lines': [],
+            'people': [],
+            'timestamp': ''
+        });
 
-  })
+    })
 }
 
 function generateLimit() {
-  return Math.floor(Math.random() * 18) + 3;
-  // return Math.floor(Math.random() * 2) + 2;
+    return Math.floor(Math.random() * 18) + 3;
+    // return Math.floor(Math.random() * 2) + 2;
 }
 
 exports.register.attributes = {
-  name: 'base'
+    name: 'base'
 };
