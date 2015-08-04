@@ -18,6 +18,7 @@ function twil() {
     };
 
     this.receiveLine = function(request, reply) {
+        console.log(fromTwilio(request));
         if (fromTwilio(request)) {
             var resp = new Twilio.TwimlResponse();
             resp.message('this is a reply');
