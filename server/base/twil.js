@@ -1,12 +1,12 @@
 var accountSid = process.env.TWILIO_SID;
 var authToken = process.env.TWILIO_AUTH;
-var client = require('twilio')(accountSid, authToken);
+var Twilio = require('twilio')(accountSid, authToken);
 
 
 function twil() {
     this.test = function(request, reply) {
         console.log('somethiong');
-        client.messages.create({
+        Twilio.messages.create({
                 body: request.payload.message,
                 to: "+12014463242",
                 from: "+17184049006"
@@ -17,7 +17,9 @@ function twil() {
     };
 
     this.receiveLine = function(request, reply) {
-        console.log(request);
+        var resp = new Twilio.TwimlResponse();
+        resp.message('this is a reply');
+        reply(resp.toString()).type('text/xml');
     }
 }
 
