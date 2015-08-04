@@ -17,7 +17,7 @@ function twil() {
     };
 
     this.receiveLine = function(request, reply) {
-        reply(request);
+        console.log(request);
     }
 }
 
