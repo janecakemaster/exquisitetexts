@@ -1,4 +1,5 @@
 var Firebase = require('firebase'),
+    Twilio = require('twilio'),
     currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     linesRef = currentRef.child('lines'),
     peopleRef = currentRef.child('people'),
@@ -12,6 +13,12 @@ exports.register = function(server, options, next) {
     server.route([{
         method: 'POST',
         path: '/addline',
+        config: {
+            handler: handleLinePost
+        }
+    }, {
+        method: 'POST',
+        path: '/test',
         config: {
             handler: handleLinePost
         }

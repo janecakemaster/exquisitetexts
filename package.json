@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^1.2.0",
     "firebase": "^2.2.7",
     "hapi": "^8.5.1",
     "hapi-assets": "^0.3.0",
