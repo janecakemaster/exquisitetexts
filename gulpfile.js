@@ -48,7 +48,7 @@ gulp.task('test', function() {
     }));
 });
 
-gulp.task('default', ['build', 'test']);
+gulp.task('default', ['build']);
 
 gulp.task('watch', function() {
   livereload.listen();

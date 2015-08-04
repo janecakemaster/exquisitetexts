@@ -17,6 +17,13 @@ exports.register = function(server, options, next) {
         }
     }, {
         method: 'GET',
+        path: '/poem/{id}',
+        config: {
+            handler: getPoem,
+            id: 'poem'
+        }
+    }, {
+        method: 'GET',
         path: '/about',
         config: {
             handler: function(request, reply) {
@@ -63,10 +70,6 @@ currentRef.on('value', function(snapshot) {
     max = curr.max;
 });
 
-/**
- * When lines get updated, check if a poem needs to get created
- * @param  {DataSnapshot} snapshot
- */
 
 /**
  * When a poem gets added
@@ -75,18 +78,6 @@ currentRef.on('value', function(snapshot) {
 poemsRef.on('value', function(snapshot) {
     poem_id = snapshot.numChildren();
 });
-
-// linesRef.once('value', function(snapshot) {
-//   var lines = snapshot.val();
-
-//   if (snapshot.numChildren() >= max) {
-//     var index;
-//       poemsRef.once('value', function(snapshot) {
-//         index = snapshot.numChildren();
-//       });
-//     setupCurrentPoem();
-//   }
-// });
 
 /**
  * addline post handler
@@ -144,6 +135,31 @@ function createPoem() {
 function generateLimit() {
     return Math.floor(Math.random() * 18) + 3;
     // return Math.floor(Math.random() * 2) + 2;
+}
+
+function getPoem(request, reply) {
+    var poemRef = poemsRef.child(request.params.id);
+    poemRef.once('value', function(snapshot) {
+        var poem = snapshot.val();
+        
+        reply.view('poem', {
+            title: 'poem' + request.params.id,
+            id: request.params.id,
+            poem: poem.lines,
+            time: renderDate(new Date(poem.timestamp))
+        });
+    });
+}
+
+
+function renderDate(date) {
+    var year = date.getUTCFullYear(),
+        month = date.getMonth() + 1,
+        day = date.getDate(),
+        hour = String("00" + date.getHours()).slice(-2),
+        minutes = String("00" + date.getMinutes()).slice(-2);
+    return month + '/' + day + '/' + year + ' ' + hour + ':' +
+        minutes;
 }
 
 exports.register.attributes = {

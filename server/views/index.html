@@ -2,7 +2,7 @@
 {% block title %}{{title}}{% endblock %}
 {% block content %}
   <header>
-    <h1>exquisite texts</h1>
+    <a href="/"><h1>exquisite texts</h1></a>
   </header>
   <section class="current">
     <h4>the last line:</h4>
@@ -14,9 +14,9 @@
     </form>
   </section>
 
-  <section class="archive">
-    <h2 id="title"></h2>
-    <h3>created at <time id="time"></time></h3>
+  <section class="poem">
+    <h2  class="poem_title" id="title"></h2>
+    <h3 class="timestamp">created at <time id="time"></time></h3>
     <div id="poems">
     </div>
   </section>
