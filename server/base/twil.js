@@ -33,7 +33,7 @@ function twil() {
 
 function fromTwilio(request) {
     var sig = request.headers['x-twilio-signature'],
-        url = 'http://exquisitetexts.com' + request.url.path,
+        url = process.env.TWILIO_URL + request.url.path,
         body = request.payload || {};
 
     return Twilio.validateRequest(authToken, sig, url, body);
