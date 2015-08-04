@@ -1,5 +1,6 @@
 var Firebase = require('firebase'),
-    Twilio = require('twilio'),
+    Twil = require('./twil'),
+    twilio = new Twil(),
     currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     linesRef = currentRef.child('lines'),
     peopleRef = currentRef.child('people'),
@@ -18,9 +19,9 @@ exports.register = function(server, options, next) {
         }
     }, {
         method: 'POST',
-        path: '/test',
+        path: '/twilio',
         config: {
-            handler: handleLinePost
+            handler: twilio.receiveLine
         }
     }, {
         method: 'GET',
