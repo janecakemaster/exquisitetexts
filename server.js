@@ -33,7 +33,7 @@ server.register([
     {
         register: require("hapi-assets"),
         options: require('./assets.js')
-    },
+},
     {
         register: require("hapi-named-routes")
     },

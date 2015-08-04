@@ -1,48 +1,36 @@
 {
-  "info": {
-    "count": 0
-  },
   "current": {
-    "name": "7",
-    "max": 3,
     "count": 1,
-    "lines": [
-      "this is line one"
-    ]
+    "lines": ["line 1", "line 2"],
+    "max": 3
+  },
+  "info": {
+    "count": 5
   },
   "poems": [{
-    "name": "2",
-    "max": 2,
-    "lines": [
-      "this is line one", "this is line two"
-    ]
+    "lines": ["line 1", "line 2", "last"],
+    "people": {
+      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
+    }
   }, {
-    "name": "3",
-    "max": 6,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four", "this is line five", "this is line six"
-    ]
+    "lines": ["line 1", "line 2", "last"],
+    "people": {
+      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
+    }
   }, {
-    "name": "4",
-    "max": 4,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four"
-    ]
+    "lines": ["line 1", "line 2", "last"],
+    "people": {
+      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
+    }
   }, {
-    "name": "5",
-    "max": 5,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four", "this is line five"
-    ]
+    "lines": ["line 1", "line 2", "last"],
+    "people": {
+      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
+    }
   }, {
-    "name": "6",
-    "max": 5,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four", "this is line five"
-    ]
+    "lines": ["line 1", "line 2", "last"],
+    "people": {
+      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
+    }
   }]
 }
