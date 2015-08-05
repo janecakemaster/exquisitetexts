@@ -41,7 +41,7 @@ function showLastLine(snapshot) {
         $lastLine.innerHTML = curr.lines.pop();
     }
     else {
-        $lastLine.innerHTML = 'No poem yet! Start one now';
+        $lastLine.innerHTML = 'No poem yet! Start one now by texting the number above';
     }
 }
 
