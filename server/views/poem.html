@@ -10,9 +10,13 @@
   <section class="poem">
     <h2 class="poem_title">{{id}}</h2>
     <h3 class="timestamp">completed at <time>{{time}}</time></h3>
+    
     {% for line in poem %}
       <p>{{line}}</p>
     {% endfor %}
 
   </section>
+
+  {% include "partials/footer.html" %}
+
 {% endblock %}
