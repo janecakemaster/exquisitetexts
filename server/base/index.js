@@ -15,12 +15,12 @@ var currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     messages = {
         next: 'what comes next? reply with your next line. ',
         start: 'a blank slate... what\'s the first line of this poem? ',
-        last: 'the last line of the current poem:\n',
-        getLast: 'text "LAST" to get the last line of the current poem. ',
-        prompt: 'text anything to continue the current poem. ',
+        last: 'the previous line of the current poem:\n',
+        getLast: 'text "LAST" to get the previous line of the current poem. ',
+        prompt: 'continue the current poem by replying with the next line. ',
         welcome: 'welcome to exquisite texts. ',
         link: 'here\'s the link to your poem:\n',
-        thanks: 'thanks! you\'ll get a link with your new poem when it is complete. ',
+        thanks: 'thanks! you\'ll get a link to your poem when it is complete. ',
         wait: 'you\'ve already submitted something, wait until someone else has added a line. '
     },
 
