@@ -4,59 +4,64 @@ var stylish = require('jshint-stylish');
 var jscs = require('gulp-jscs');
 var mocha = require('gulp-mocha');
 var concat = require('gulp-concat');
+var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var livereload = require('gulp-livereload');
 
-var assets = require('./assets');
+gulp.task('css', function() {
+    return gulp.src('./public/css/*.css')
+        .pipe(concat('app.css'))
+        .pipe(minifycss())
+        .pipe(rename({
+            extname: '.min.css'
+        }))
+        .pipe(gulp.dest('./public/css/'));
+});
 
-gulp.task('build', function() {
+gulp.task('js', function() {
+    return gulp.src('./public/js/*.js')
+        .pipe(concat('app.js'))
+        .pipe(uglify())
+        .pipe(rename({
+            extname: '.min.js'
+        }))
+        .pipe(gulp.dest('./public/js/'));
+});
 
-  var gulpFileCwd = __dirname + '/public';
-  process.chdir(gulpFileCwd);
 
-  gulp.src(assets.development.css)
-    .pipe(concat('styles.css'))
-    .pipe(minifycss())
-    .pipe(gulp.dest('./css/'));
-  // concat and minify your js
-  gulp.src(assets.development.js)
-    .pipe(concat('scripts.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./js/'));
-
-  gulp.src([
-    '**/*.js',
-    '!node_modules'
-  ])
-    .pipe(jshint({
-      lookup: true
-    }))
-    .pipe(jscs({
-      fix: true
-    }))
-    .pipe(jshint.reporter(stylish))
-    .pipe(livereload());
-
-  return process.chdir(__dirname);
+gulp.task('lint', function() {
+    return gulp.src([
+        './gulpfile.js', './server/**/*.js', './public/js/*.js',
+    ])
+        .pipe(jshint({
+            lookup: true
+        }))
+        .pipe(jscs({
+            fix: false
+        }))
+        .pipe(jshint.reporter(stylish))
+        .pipe(livereload());
 });
 
 gulp.task('test', function() {
-  return gulp.src('tests/**/*.js')
-    .pipe(mocha({
-      reporter: 'nyan'
-    }));
+    return gulp.src('tests/**/*.js')
+        .pipe(mocha({
+            reporter: 'nyan'
+        }));
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['lint', 'js', 'css']);
 
 gulp.task('watch', function() {
-  livereload.listen();
-  gulp.watch(['./server/**/*.html', './public/js/*.js', './public/css/*.css'], [
-    'reload'
-  ]);
+    livereload.listen();
+    gulp.watch(['./server/**/*.html', './public/js/*.js',
+        './public/css/*.css'
+    ], [
+        'default', 'reload'
+    ]);
 });
 
 gulp.task('reload', function() {
-  return livereload.reload();
+    return livereload.reload();
 });

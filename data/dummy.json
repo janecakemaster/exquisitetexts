@@ -1,41 +1,11 @@
 {
-  "current": {
-    "count": 1,
-    "lines": ["line 1", "line 2"],
-    "max": 3
+  "current" : {
+    "max" : 3,
+    "timestamp" : ""
   },
-  "info": {
-    "count": 5
-  },
-  "poems": [{
-    "lines": ["line 1", "line 2", "last"],
-    "people": {
-      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
-    },
-    "timestamp": "timestamp"
-  }, {
-    "lines": ["line 1", "line 2", "last"],
-    "people": {
-      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
-    },
-    "timestamp": "timestamp"
-  }, {
-    "lines": ["line 1", "line 2", "last"],
-    "people": {
-      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
-    },
-    "timestamp": "timestamp"
-  }, {
-    "lines": ["line 1", "line 2", "last"],
-    "people": {
-      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
-    },
-    "timestamp": "timestamp"
-  }, {
-    "lines": ["line 1", "line 2", "last"],
-    "people": {
-      "-Jvs5K8Q80YnunmD4JfG": "2014463242"
-    },
-    "timestamp": "timestamp"
+  "poems" : [{
+    "lines" : [ "this is a poem", "i wonder", "why it's raining outside" ],
+    "timestamp" : 1438747366659,
+    "broadcasted": true
   }]
 }
