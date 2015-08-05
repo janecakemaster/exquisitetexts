@@ -164,12 +164,20 @@ function getPoem(request, reply) {
     poemRef.once('value', function(snapshot) {
         var poem = snapshot.val();
 
-        reply.view('poem', {
-            title: 'exquisite texts - ' + 'poem' + request.params.id,
-            id: request.params.id,
-            poem: poem.lines,
-            time: renderDate(new Date(poem.timestamp))
-        });
+        if (poem && poem.lines) {
+            reply.view('poem', {
+                title: 'exquisite texts - ' + 'poem' + request.params.id,
+                id: request.params.id,
+                poem: poem.lines,
+                time: renderDate(new Date(poem.timestamp))
+            });
+        }
+        else {
+            reply.view('404', {
+                title: 'exquisite texts - 404',
+                message: 'there is no poem here'
+            }).code(404);
+        }
     });
 }
 
@@ -227,7 +235,7 @@ function getLastLine() {
 
     currentRef.once('value', function(snapshot) {
         var curr = snapshot.val();
-        if(curr && curr.lines) {
+        if (curr && curr.lines) {
             line = curr.lines.pop();
         }
         else {
