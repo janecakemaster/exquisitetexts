@@ -7,10 +7,11 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
+var clean = require('gulp-clean');
 var livereload = require('gulp-livereload');
 
 gulp.task('css', function() {
-    return gulp.src('./public/css/*.css')
+    gulp.src('./public/css/*.css')
         .pipe(concat('app.css'))
         .pipe(minifycss())
         .pipe(rename({
@@ -20,7 +21,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-    return gulp.src('./public/js/*.js')
+    gulp.src('./public/js/*.js')
         .pipe(concat('app.js'))
         .pipe(uglify())
         .pipe(rename({
@@ -31,9 +32,9 @@ gulp.task('js', function() {
 
 
 gulp.task('lint', function() {
-    return gulp.src([
-        './gulpfile.js', './server/**/*.js', './public/js/*.js',
-    ])
+    gulp.src([
+            './gulpfile.js', './server/**/*.js', './public/js/*.js', '!./public/js/app.min.js'
+        ])
         .pipe(jshint({
             lookup: true
         }))
@@ -51,6 +52,13 @@ gulp.task('test', function() {
         }));
 });
 
+gulp.task('clean', function() {
+    gulp.src(['./public/css/app.min.css', './public/js/app.min.js'], {
+            read: false
+        })
+        .pipe(clean());
+});
+
 gulp.task('default', ['lint', 'js', 'css']);
 
 gulp.task('watch', function() {
@@ -58,7 +66,7 @@ gulp.task('watch', function() {
     gulp.watch(['./server/**/*.html', './public/js/*.js',
         './public/css/*.css'
     ], [
-        'default', 'reload'
+        'reload'
     ]);
 });
 
