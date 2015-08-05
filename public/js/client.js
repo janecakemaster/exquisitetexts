@@ -4,36 +4,37 @@ var
     currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     poemsRef = new Firebase('https://exquisitehues.firebaseio.com/poems'),
     $lastLine = document.getElementById('lastline'),
-    $poems = document.getElementById('poems');
+    $poem = document.getElementById('poems');
     
 if ($lastLine) {
     currentRef.on('value', showLastLine);
 }
 
-if ($poems) {
+if ($poem) {
     poemsRef.orderByPriority().limitToLast(1).on('value', function(snapshot) {
         // clear previous poem
-        $poems.innerHTML = '';
+        $poem.innerHTML = '';
 
         snapshot.forEach(function(child) {
             var poem = child.val(),
-                $poem = document.createElement('section'),
                 $header = document.getElementById('title'),
                 $time = document.getElementById('time'),
                 date = new Date(poem.timestamp);
+
             $header.innerText = child.key();
+
             if (!isNaN(date)) {
                 $time.innerText = renderDate(date);
             }
             else {
                 $time.innerText = 'unknown';
             }
-            poem.lines.forEach(function(poem) {
+
+            poem.lines.forEach(function(line) {
                 var $p = document.createElement('p');
-                $p.innerText = poem;
+                $p.innerText = line;
                 $poem.appendChild($p);
             });
-            $poems.appendChild($poem);
         });
     });
 }

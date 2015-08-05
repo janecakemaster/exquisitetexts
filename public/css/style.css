@@ -53,7 +53,7 @@ section {
     border-top: 1px solid gray;
 }
 
-.poem h2, .poem h3 {
+.poem h2 {
     margin: 0;
 }
 
@@ -76,6 +76,7 @@ footer {
 }
 
 .timestamp {
+    margin: 0 0 10px 0;
     font-size: .7rem;
 
     color: #6d6d6d;
