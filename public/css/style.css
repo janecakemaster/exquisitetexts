@@ -3,15 +3,25 @@ html {
     font-size: 20px;
 
     width: 100%;
+
+    color: #0a0a0a;
+    background: #fcfcfc;
 }
+
 body {
     padding: 8px;
 }
 
 a, a:visited {
-    color: #E50622;
-    text-decoration: none;
     cursor: pointer;
+    transition: all linear .3s;
+    text-decoration: none;
+
+    color: #e50622;
+}
+
+a:hover, a:focus {
+    color: #0692e5;
 }
 
 p {
@@ -31,10 +41,8 @@ h1 {
 
 .current h4 {
     margin: 0;
-}
 
-#lastline {
-    display: inline;
+    color: #474747;
 }
 
 section {
@@ -50,7 +58,7 @@ section {
 }
 
 .poem_title {
-    color: #E50622;
+    color: #e50622;
 }
 
 .prompt {
@@ -59,6 +67,7 @@ section {
 
 .prompt span {
     font-weight: 700;
+
     letter-spacing: -1px;
 }
 
