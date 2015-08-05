@@ -1,6 +1,7 @@
 var accountSid = process.env.TWILIO_SID;
 var authToken = process.env.TWILIO_AUTH;
-var Twilio = require('twilio')(accountSid, authToken);
+var Twilio = require('twilio');
+
 
 function twil() {
     this.test = function(request, reply) {
