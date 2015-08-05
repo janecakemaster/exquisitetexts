@@ -13,3 +13,6 @@ make sure to have an `.env` file with all the secret things
 ## future features
 * archive of poems
 * curated landing page poem
+* searchable poems
+* stats about poems?
+* share on social media
