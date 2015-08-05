@@ -25,8 +25,12 @@ h1, h2, h3, h4 {
     font-weight: 800;
 }
 
+h1 {
+    margin: 0 0 10px 0;
+}
+
 .current h4 {
-    display: inline;
+    margin: 0;
 }
 
 #lastline {
@@ -37,7 +41,7 @@ section {
     padding: 20px 0;
 }
 
-.poem {
+.current, .poem {
     border-top: 1px solid gray;
 }
 
@@ -47,4 +51,16 @@ section {
 
 .poem_title {
     color: #E50622;
+}
+
+.prompt {
+    font-size: 1.5rem;
+}
+
+.prompt span {
+    font-weight: 700;
+}
+
+footer {
+    margin-top: 100px;
 }

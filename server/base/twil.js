@@ -1,4 +1,4 @@
-var accountSid = process.env.TWILIO_SID;
+// var accountSid = process.env.TWILIO_SID;
 var authToken = process.env.TWILIO_AUTH;
 var Twilio = require('twilio');
 
