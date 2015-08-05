@@ -2,6 +2,5 @@ npm-debug.log
 node_modules
 
 ## my stuff
-*.sublime-*
 notes.md
 .env
