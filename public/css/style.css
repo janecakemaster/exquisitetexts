@@ -1,8 +1,8 @@
 html {
+    width: 100%;
+
     font-family: 'Crimson Text', 'Garamond', serif;
     font-size: 20px;
-
-    width: 100%;
 
     color: #0a0a0a;
     background: #fcfcfc;
@@ -25,10 +25,10 @@ a:hover, a:focus {
 }
 
 p {
+    margin: 0;
+
     font-size: 1rem;
     line-height: 1;
-
-    margin: 0;
 }
 
 h1, h2, h3, h4 {
@@ -77,5 +77,6 @@ footer {
 
 .timestamp {
     font-size: .7rem;
-    color: #6D6D6D;
+
+    color: #6d6d6d;
 }
