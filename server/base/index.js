@@ -197,9 +197,10 @@ function broadcast(poem, id) {
         }, function(error, message) {
             if (!error) {
                 poemsRef.child(id + '/contributors/' + encrypted).set(true);
+                console.log('success', message);
             }
             else {
-                console.log('Oops! There was an error.');
+                console.log('Oops! There was an error.', error);
             }
         });
     }

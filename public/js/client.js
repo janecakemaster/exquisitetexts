@@ -12,6 +12,9 @@ if ($lastLine) {
 
 if ($poems) {
     poemsRef.orderByPriority().limitToLast(1).on('value', function(snapshot) {
+        // clear previous poem
+        $poems.innerHTML = '';
+
         snapshot.forEach(function(child) {
             var poem = child.val(),
                 $poem = document.createElement('section'),
