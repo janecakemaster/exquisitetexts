@@ -334,7 +334,7 @@ function renderDate(date) {
  * @return {number} integer from min to max
  */
 function generateLimit() {
-    return Math.floor(Math.random() * 12) + 3;
+    return Math.floor(Math.random() * 7) + 3;
     // return Math.floor(Math.random() * 2) + 2;
 }
 
