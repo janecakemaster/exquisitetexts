@@ -7,7 +7,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
-var clean = require('gulp-clean');
+var del = require('del');
 var livereload = require('gulp-livereload');
 
 gulp.task('css', function() {
@@ -33,8 +33,9 @@ gulp.task('js', function() {
 
 gulp.task('lint', function() {
     gulp.src([
-            './gulpfile.js', './server/**/*.js', './public/js/*.js', '!./public/js/app.min.js'
-        ])
+        './gulpfile.js', './server/**/*.js', './public/js/*.js',
+        '!./public/js/app.min.js'
+    ])
         .pipe(jshint({
             lookup: true
         }))
@@ -52,11 +53,10 @@ gulp.task('test', function() {
         }));
 });
 
-gulp.task('clean', function() {
-    gulp.src(['./public/css/app.min.css', './public/js/app.min.js'], {
-            read: false
-        })
-        .pipe(clean());
+gulp.task('clean', function(cb) {
+    del([
+        './public/css/app.min.css', './public/js/app.min.js'
+    ], cb);
 });
 
 gulp.task('default', ['lint', 'js', 'css']);
