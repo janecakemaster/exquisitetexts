@@ -1,7 +1,7 @@
 // var accountSid = process.env.TWILIO_SID;
 var authToken = process.env.TWILIO_AUTH;
 var Twilio = require('twilio');
-
+var Firebase = require('Firebase');
 
 function twil() {
     this.test = function(request, reply) {
@@ -24,7 +24,7 @@ function twil() {
         }
         else {
             reply.view('404', {
-                title: 'bad shit dude'
+                title: 'this feels bad'
             }).code(404);
         }
     };
