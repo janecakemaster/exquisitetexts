@@ -122,12 +122,12 @@ poemsRef.on('child_added', function(snapshot) {
  */
 function handleText(request, reply) {
     if (fromTwilio(request)) {
-        var message = request.payload.Body.trim(),
+        var message = request.payload.Body.trim().toLowerCase(),
             number = request.payload.From,
             resp = new Twilio.TwimlResponse(),
             respMsg;
 
-        if (message === 'LAST' || message === 'last') {
+        if (message === 'last') {
             var line = getLastLine();
 
             if (line) {
