@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 
 var Firebase = require('firebase');
 var Twilio = require('twilio');
@@ -29,7 +28,7 @@ var currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     },
 
     max,
-    poem_id;
+    poemid;
 
 router.post('/', function(req, res, next) {
   if (Twilio.validateExpressRequest(req, process.env.TWILIO_AUTH)) {
@@ -69,27 +68,40 @@ router.post('/', function(req, res, next) {
   }
 });
 
-function getPoem(req, reply) {
-  var poemRef = poemsRef.child(req.params.id);
-  poemRef.once('value', function(snapshot) {
+//////////////
+// firebase //
+//////////////
+
+/**
+ * When data updates, update the max # of lines
+ * @param  {DataSnapshot} snapshot
+ */
+currentRef.on('value', function(snapshot) {
+    var curr = snapshot.val();
+    max = curr.max;
+});
+
+/**
+ * update current poem id
+ * @param  {DataSnapshot} snapshot
+ */
+poemsRef.on('value', function(snapshot) {
+    poemid = snapshot.numChildren();
+    console.log('poem id', poemid);
+});
+
+/**
+ * When a poem gets added
+ * @param  {DataSnapshot} snapshot
+ */
+poemsRef.on('child_added', function(snapshot) {
     var poem = snapshot.val();
 
-    if (poem && poem.lines) {
-      reply.view('poem', {
-        title: 'exquisite texts - ' + 'poem' + req.params.id,
-        id: req.params.id,
-        poem: poem.lines,
-        time: renderDate(new Date(poem.timestamp))
-      });
+    if (poem.broadcasted === false) {
+        broadcast(poem, snapshot.key());
     }
-    else {
-      reply.view('404', {
-        title: 'exquisite texts - 404',
-        message: 'there is no poem here'
-      }).code(404);
-    }
-  });
-}
+});
+
 
 ////////////
 // twilio //
@@ -164,7 +176,7 @@ function getLastLine() {
  function createPoem() {
   currentRef.once('value', function(snapshot) {
     var newPoem = snapshot.val();
-    var poemRef = poemsRef.child(poem_id.toString());
+    var poemRef = poemsRef.child(poemid.toString());
 
     poemRef.set({
       'lines': newPoem.lines,
@@ -218,25 +230,6 @@ function getLastLine() {
 /////////////
 // helpers //
 /////////////
-
-// function fromTwilio(req) {
-//   var sig = req.headers['x-twilio-signature'],
-//   url = process.env.APP_URL + req.url.path,
-//   body = req.payload || {};
-
-//   return Twilio.validateRequest(process.env.TWILIO_AUTH, sig, url, body);
-// }
-
-function renderDate(date) {
-  var year = date.getUTCFullYear(),
-  month = date.getMonth() + 1,
-  day = date.getDate(),
-  hour = String("00" + date.getHours()).slice(-2),
-  minutes = String("00" + date.getMinutes()).slice(-2);
-  return month + '/' + day + '/' + year + ' ' + hour + ':' +
-  minutes;
-}
-
 /**
  * Generate the limit for a new poem
  *
