@@ -38,10 +38,4 @@ gulp.task('sass:watch', function () {
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 });
 
-// gulp.task('clean', function(cb) {
-//   del([
-//     'public/**/*.min.css', 'public/**/*.min.js'
-//   ], cb);
-// });
-
 gulp.task('default', ['sass', 'js']);
