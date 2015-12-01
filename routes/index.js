@@ -42,7 +42,7 @@ router.get('/', function(req, res) {
 
 function onRetrieveSuccess(req, res, next, data) {
   var prevId = parseInt(data.id, 10) - 1,
-  prevRef = poemsRef.child(prevId);
+      prevRef = poemsRef.child(prevId);
 
   prevRef.once('value', function(snapshot) {
     var poem = snapshot.val();
@@ -50,6 +50,9 @@ function onRetrieveSuccess(req, res, next, data) {
     if (poem) {
       data.prevPoemId = prevId;
       checkNext(req, res, next, data);
+    }
+    else {
+      renderPoem(req, res, next, data);
     }
   });
 }
@@ -63,6 +66,9 @@ function checkNext(req, res, next, data) {
 
     if (poem) {
       data.nextPoemId = nextId;
+      renderPoem(req, res, next, data);
+    }
+    else {
       renderPoem(req, res, next, data);
     }
   });
@@ -79,17 +85,13 @@ function renderPoem(req, res, next, data) {
   });
 }
 
-/**
- * [renderDate description]
- * @param  {[type]} date [description]
- * @return {[type]}      [description]
- */
- function renderDate(date) {
+function renderDate(date) {
   var year = date.getUTCFullYear(),
-  month = date.getMonth() + 1,
-  day = date.getDate(),
-  hour = String("00" + date.getHours()).slice(-2),
-  minutes = String("00" + date.getMinutes()).slice(-2);
+      month = date.getMonth() + 1,
+      day = date.getDate(),
+      hour = String("00" + date.getHours()).slice(-2),
+      minutes = String("00" + date.getMinutes()).slice(-2);
+
   return month + '/' + day + '/' + year + ' ' + hour + ':' +
   minutes;
 }
