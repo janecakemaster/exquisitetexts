@@ -11,7 +11,22 @@ var poemsRef = new Firebase('https://exquisitehues.firebaseio.com/poems');
 // Routes //
 ////////////
 
-router.get('/poem/:id', getPoem);
+router.get('/poem/:id', function(req, res, next) {
+  var poemid = req.params.id,
+  poemRef = poemsRef.child(poemid);
+
+  poemRef.once('value', function(snapshot) {
+    var poem = snapshot.val();
+
+    if (poem && poem.lines) {
+      onRetrieveSuccess(req, res, next, { poem: poem, id: poemid });
+    }
+
+    else {
+      next();
+    }
+  });
+});
 
 router.get('/about', function(req, res) {
   res.render('about', { title: 'about' });
@@ -25,31 +40,42 @@ router.get('/', function(req, res) {
 // Helpers //
 /////////////
 
-/**
- * [getPoem description]
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
- */
-function getPoem(req, res, next) {
-  var poemid = req.params.id,
-  poemRef = poemsRef.child(poemid);
+function onRetrieveSuccess(req, res, next, data) {
+  var prevId = parseInt(data.id, 10) - 1,
+  prevRef = poemsRef.child(prevId);
 
-  poemRef.once('value', function(snapshot) {
+  prevRef.once('value', function(snapshot) {
     var poem = snapshot.val();
 
-    if (poem && poem.lines) {
-      res.render('poem', {
-        title: 'poem ' + poemid,
-        poemid: poemid,
-        poem: poem.lines,
-        time: renderDate(new Date(poem.timestamp))
-      })
+    if (poem) {
+      data.prevPoemId = prevId;
+      checkNext(req, res, next, data);
     }
-    else {
-      next();
+  });
+}
+
+function checkNext(req, res, next, data) {
+  var nextId = parseInt(data.id, 10) + 1,
+      nextRef = poemsRef.child(nextId);
+
+  nextRef.once('value', function(snapshot) {
+    var poem = snapshot.val();
+
+    if (poem) {
+      data.nextPoemId = nextId;
+      renderPoem(req, res, next, data);
     }
+  });
+}
+
+function renderPoem(req, res, next, data) {
+  res.render('poem', {
+    title: 'poem ' + data.id,
+    poemid: data.id,
+    poem: data.poem.lines,
+    time: renderDate(new Date(data.poem.timestamp)),
+    prevPoem: data.prevPoemId,
+    nextPoem: data.nextPoemId
   });
 }
 
@@ -58,7 +84,7 @@ function getPoem(req, res, next) {
  * @param  {[type]} date [description]
  * @return {[type]}      [description]
  */
-function renderDate(date) {
+ function renderDate(date) {
   var year = date.getUTCFullYear(),
   month = date.getMonth() + 1,
   day = date.getDate(),

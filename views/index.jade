@@ -3,8 +3,10 @@ extends layout
 block content
   include ./includes/header.jade
   include ./includes/current.jade
+
   section(class='poem')
     h2(class='poem_title', id='title') ...
     h3(class='timestamp') completed at
       time(id='time')
+
     div(id='poems')

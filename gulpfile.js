@@ -27,7 +27,9 @@ gulp.task('js', function() {
   .pipe(g.jscs({
     fix: true
   }))
-  .pipe(g.jshint.reporter(stylish))
+  .pipe(g.jshint.reporter(stylish));
+
+  gulp.src('src/js/**/*.js')
   .pipe(g.concat('app.js'))
   .pipe(g.uglify())
   .pipe(g.rename({
