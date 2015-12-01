@@ -1,13 +1,15 @@
 {% extends './layouts/default.html' %}
-
 {% block title %}{{title}}{% endblock %}
-
 {% block content %}
-    <ul class="menu">
-        <li><a href="{{path.index}}">Home</a></li>
-        <li><a href="{{path.about}}">About</a></li>
-    </ul>
+  {% include "partials/header.html" %}
+  <p>construct a poem through text messages by only knowing the previous line of the poem. get a link to your creation when it reaches critical mass.</p>
+  <p>
+    <ol>
+      <li>text the number above with the next line to continue the current poem</li>
+      <li>text 'LAST' to the number above to get the previous line of the current poem</li>
+    </ol>
+  </p>
+  <p>this is an exquisite corpse experiment made by <a href="//janekim.me">jane</a> and powered by hapijs, twilio, and digital ocean. leave feedback with a <a href="https://github.com/janecakemaster/exquisitetexts/issues/new">github issue</a></p>
+  <p>if you like this experiment, check out <a href="https://github.com/creativecodenyc/exquisitecode">exquisite code</a>, an exquisite corpse for code</p>
 
-    <h1>{{title}}</h1>
-    <p>This is an about page. Have a look around.</p>
 {% endblock %}

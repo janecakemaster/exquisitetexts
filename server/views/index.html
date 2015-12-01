@@ -1,19 +1,20 @@
 {% extends './layouts/default.html' %}
-
 {% block title %}{{title}}{% endblock %}
-
 {% block content %}
-<section class="current">
-  <h1>the last line</h1>
-  <p id="lastline"></p>
-  <form action="/nextline" method="POST">
-      <input type="text" name="line">
-  </form>
-</section>
-<section class="archive">
-<h2>last poem created</h2>
+  {% include "partials/header.html" %}
+  <section class="current">
+    <h4>the last line:</h4>
+    <p id="lastline">...</p>
+  </section>
+
+  <section class="poem">
+    <h2 class="poem_title" id="title">...</h2>
+    <h3 class="timestamp">completed at <time id="time"></time></h3>
     <div id="poems">
+    ...
     </div>
-</section>
+  </section>
+
+{% include "partials/footer.html" %}
 
 {% endblock %}

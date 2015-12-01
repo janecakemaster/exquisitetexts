@@ -1,48 +1,11 @@
 {
-  "info": {
-    "count": 0
+  "current" : {
+    "max" : 3,
+    "timestamp" : ""
   },
-  "current": {
-    "name": "7",
-    "max": 3,
-    "count": 1,
-    "lines": [
-      "this is line one"
-    ]
-  },
-  "poems": [{
-    "name": "2",
-    "max": 2,
-    "lines": [
-      "this is line one", "this is line two"
-    ]
-  }, {
-    "name": "3",
-    "max": 6,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four", "this is line five", "this is line six"
-    ]
-  }, {
-    "name": "4",
-    "max": 4,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four"
-    ]
-  }, {
-    "name": "5",
-    "max": 5,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four", "this is line five"
-    ]
-  }, {
-    "name": "6",
-    "max": 5,
-    "lines": [
-      "this is line one", "this is line two", "this is line three",
-      "this is line four", "this is line five"
-    ]
+  "poems" : [{
+    "lines" : [ "this is a poem", "i wonder", "why it's raining outside" ],
+    "timestamp" : 1438747366659,
+    "broadcasted": true
   }]
 }
