@@ -32,9 +32,10 @@ var currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     poem_id;
 
 router.post('/', function(req, res, next) {
-  if (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH)) {
-    var message = req.body.trim().toLowerCase(),
-        number = req.payload.From,
+  if (Twilio.validateExpressRequest(req, process.env.TWILIO_AUTH)) {
+    var rawMessage = req.body.Body,
+	message = rawMessage.trim().toLowerCase(),
+        number = req.body.From,
         resp = new Twilio.TwimlResponse(),
         respMsg;
 
@@ -55,12 +56,12 @@ router.post('/', function(req, res, next) {
     //     respMsg = messages.welcome + messages.getLast + messages.prompt;
     // }
     else {
-      addLine(message, number);
+      addLine(rawMessage, number);
       respMsg = messages.thanks;
     }
 
     resp.message(respMsg);
-    response.set('Content-Type', 'text/xml')
+    res.set('Content-Type', 'text/xml')
     .send(resp.toString());
   }
   else {
