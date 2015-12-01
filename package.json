@@ -10,6 +10,7 @@
     "cookie-parser": "*",
     "debug": "*",
     "express": "*",
+    "firebase": "^2.3.2",
     "jade": "*",
     "morgan": "*",
     "serve-favicon": "*"
