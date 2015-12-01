@@ -13,5 +13,13 @@
     "jade": "*",
     "morgan": "*",
     "serve-favicon": "*"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-sass-lint": "^1.1.0",
+    "node-normalize-scss": "^1.0.3"
   }
 }
