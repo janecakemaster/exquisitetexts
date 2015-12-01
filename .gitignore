@@ -1,6 +1,7 @@
 npm-debug.log
 node_modules
 
-## my stuff
-notes.md
+public/javascripts
+public/stylesheets
+
 .env
