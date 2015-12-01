@@ -1,7 +1,7 @@
 /* global Firebase, document */
 'use strict'
-var
-    currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
+
+var currentRef = new Firebase('https://exquisitehues.firebaseio.com/current'),
     poemsRef = new Firebase('https://exquisitehues.firebaseio.com/poems'),
     $lastLine = document.getElementById('lastline'),
     $poem = document.getElementById('poems');
