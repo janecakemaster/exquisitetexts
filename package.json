@@ -13,7 +13,8 @@
     "firebase": "^2.3.2",
     "jade": "*",
     "morgan": "*",
-    "serve-favicon": "*"
+    "serve-favicon": "*",
+    "twilio": "^2.5.2"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
