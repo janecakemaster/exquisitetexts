@@ -1,7 +1,9 @@
 var gulp = require('gulp');
 var g = require('gulp-load-plugins')();
 var stylish = require('jshint-stylish');
-var del = require('del');
+// var del = require('del');
+
+var jsFiles = [ 'src/js/**/*.js', 'routes/*.js', 'app.js', 'gulpfile.js' ];
 
 gulp.task('sass', function () {
   gulp.src('src/sass/**/*.scss')
@@ -18,12 +20,12 @@ gulp.task('sass', function () {
 });
 
 gulp.task('js', function() {
-  gulp.src('src/js/**/*.js')
+  gulp.src(jsFiles)
   .pipe(g.jshint({
     lookup: true
   }))
   .pipe(g.jscs({
-    fix: true 
+    fix: true
   }))
   .pipe(g.jshint.reporter(stylish))
   .pipe(g.concat('app.js'))
@@ -36,7 +38,7 @@ gulp.task('js', function() {
 
 gulp.task('watch', function () {
   gulp.watch('src/sass/*', ['sass']);
-  gulp.watch('src/js/*', ['js']);
+  gulp.watch(jsFiles, ['js']);
 });
 
 gulp.task('default', ['sass', 'js']);
