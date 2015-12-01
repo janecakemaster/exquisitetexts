@@ -1,9 +1,7 @@
 doctype html
 html
-  head
-    title= title
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/stylesheets/style.min.css')
+  include ./includes/head.jade
   body
     block content
+    script(type='text/javascript', src='https://cdn.firebase.com/js/client/2.3.2/firebase.js')
     script(type='text/javascript', src='/javascripts/app.min.js')
