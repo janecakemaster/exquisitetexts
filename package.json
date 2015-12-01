@@ -1,41 +1,61 @@
 {
-  "name": "exquisite-hues",
+  "name": "exquisite-texts",
   "version": "1.0.0",
-  "description": "",
+  "description": "an [exquisite corpse](https://en.wikipedia.org/wiki/Exquisite_corpse) experiment through text messages.",
   "main": "web.js",
   "scripts": {
     "start": "node server.js",
     "test": "gulp test"
   },
-  "author": "",
+  "author": "@janecakemaster",
   "engines": {
-    "node": "^0.12.7",
+    "node": "^5.1.0",
     "npm": "^2.12.1"
   },
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^1.2.0",
-    "firebase": "^2.2.7",
-    "hapi": "^8.5.1",
-    "hapi-assets": "^0.3.0",
-    "hapi-named-routes": "^0.3.0",
-    "joi": "^6.6.0",
-    "swig": "^1.4.2",
-    "twilio": "^2.2.1"
+    "del": "^2.1.0",
+    "dotenv": "*",
+    "firebase": "*",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "hapi": "^11.1.2",
+    "hapi-assets": "*",
+    "hapi-named-routes": "*",
+    "joi": "^7.0.1",
+    "swig": "*",
+    "twilio": "*"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "del": "^1.2.0",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-jscs": "^2.0.0",
-    "gulp-jshint": "^1.11.2",
-    "gulp-livereload": "^3.8.0",
-    "gulp-minify-css": "^1.2.0",
-    "gulp-mocha": "^2.1.3",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0",
-    "jshint-stylish": "^2.0.1",
-    "mocha": "^2.2.5"
-  }
+    "chai": "*",
+    "del": "*",
+    "gulp": "*",
+    "gulp-concat": "*",
+    "gulp-jscs": "*",
+    "gulp-jshint": "*",
+    "gulp-livereload": "*",
+    "gulp-minify-css": "*",
+    "gulp-mocha": "*",
+    "gulp-rename": "*",
+    "gulp-uglify": "*",
+    "jshint-stylish": "*",
+    "mocha": "*"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janecakemaster/exquisitetexts.git"
+  },
+  "keywords": [
+    "exquisite",
+    "corpse",
+    "node",
+    "poetry"
+  ],
+  "bugs": {
+    "url": "https://github.com/janecakemaster/exquisitetexts/issues"
+  },
+  "homepage": "https://github.com/janecakemaster/exquisitetexts#readme"
 }
