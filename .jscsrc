@@ -12,5 +12,7 @@
     },
     "requireKeywordsOnNewLine": ["else"],
     "disallowKeywordsOnNewLine": [],
-    "requireMultipleVarDecl": ["require"]
+    "requireMultipleVarDecl": {
+        allExcept: ["require"]
+    }
 }
