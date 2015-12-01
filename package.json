@@ -1,61 +1,17 @@
 {
-  "name": "exquisite-texts",
-  "version": "1.0.0",
-  "description": "an [exquisite corpse](https://en.wikipedia.org/wiki/Exquisite_corpse) experiment through text messages.",
-  "main": "web.js",
+  "name": "exquisite-express",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "test": "gulp test"
+    "start": "node ./bin/www"
   },
-  "author": "@janecakemaster",
-  "engines": {
-    "node": "^5.1.0",
-    "npm": "^2.12.1"
-  },
-  "license": "MIT",
   "dependencies": {
-    "del": "^2.1.0",
-    "dotenv": "*",
-    "firebase": "*",
-    "gulp-jscs": "^3.0.2",
-    "gulp-jshint": "^2.0.0",
-    "hapi": "^11.1.2",
-    "hapi-assets": "*",
-    "hapi-named-routes": "*",
-    "joi": "^7.0.1",
-    "swig": "*",
-    "twilio": "*"
-  },
-  "devDependencies": {
-    "chai": "*",
-    "del": "*",
-    "gulp": "*",
-    "gulp-concat": "*",
-    "gulp-jscs": "*",
-    "gulp-jshint": "*",
-    "gulp-livereload": "*",
-    "gulp-minify-css": "*",
-    "gulp-mocha": "*",
-    "gulp-rename": "*",
-    "gulp-uglify": "*",
-    "jshint-stylish": "*",
-    "mocha": "*"
-  },
-  "directories": {
-    "test": "tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/janecakemaster/exquisitetexts.git"
-  },
-  "keywords": [
-    "exquisite",
-    "corpse",
-    "node",
-    "poetry"
-  ],
-  "bugs": {
-    "url": "https://github.com/janecakemaster/exquisitetexts/issues"
-  },
-  "homepage": "https://github.com/janecakemaster/exquisitetexts#readme"
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "jade": "*",
+    "morgan": "*",
+    "serve-favicon": "*"
+  }
 }
