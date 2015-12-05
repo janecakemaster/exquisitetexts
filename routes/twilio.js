@@ -87,7 +87,6 @@ currentRef.on('value', function(snapshot) {
  */
 poemsRef.on('value', function(snapshot) {
     poemid = snapshot.numChildren();
-    console.log('poem id', poemid);
 });
 
 /**
