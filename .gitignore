@@ -5,4 +5,4 @@ public/javascripts
 public/stylesheets
 
 .env
-env.sh
+*.sh
