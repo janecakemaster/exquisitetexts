@@ -12,7 +12,7 @@ gulp.task('sass', function () {
   .pipe(g.sass({
     includePaths: require('node-normalize-scss').includePaths
   }))
-  .pipe(g.minifyCss())
+  .pipe(g.cssnano())
   .pipe(g.rename({
     extname: '.min.css'
   }))
