@@ -11,7 +11,7 @@
     "express": "4.13.4",
     "firebase": "2.4.0",
     "jade": "1.11.0",
-    "morgan": "1.6.1",
+    "morgan": "1.7.0",
     "twilio": "2.9.0"
   },
   "devDependencies": {
